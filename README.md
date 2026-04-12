@@ -5,12 +5,31 @@
 **Google Solutions Challenge 2026 · Theme: Unbiased AI Decision · Open Innovation Track**
 **SDG 7: Affordable and Clean Energy**
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vijaideen/SPECTRA-GSC2026/blob/main/SPECTRA_v26_3.ipynb)
+[![GitHub](https://img.shields.io/badge/GitHub-vijaideen%2FSPECTRA--GSC2026-181717?logo=github)](https://github.com/vijaideen/SPECTRA-GSC2026)
+![SDG 7](https://img.shields.io/badge/SDG-7%20Affordable%20%26%20Clean%20Energy-FDBE00)
+![Track](https://img.shields.io/badge/Track-Open%20Innovation-4285F4)
+
+---
+
+## 🚀 Live MVP
+
+| | |
+|---|---|
+| **▶ Run in Colab** | [https://colab.research.google.com/github/vijaideen/SPECTRA-GSC2026/blob/main/SPECTRA_v26_3.ipynb](https://colab.research.google.com/github/vijaideen/SPECTRA-GSC2026/blob/main/SPECTRA_v26_3.ipynb) |
+| **GitHub Repo** | [https://github.com/vijaideen/SPECTRA-GSC2026](https://github.com/vijaideen/SPECTRA-GSC2026) |
+| **Runtime Required** | T4 GPU (free in Colab) |
+| **Training Time** | ~5–7 minutes |
+| **Inference Speed** | < 1 ms on GPU |
+
+> ⚠️ Set runtime to **T4 GPU** before running — `Runtime → Change runtime type → T4 GPU → Save`
+
 ---
 
 ## 🎯 The Problem This Project Solves
 
 > *"Computer programs now make life-changing decisions about who gets a job, a bank loan, or even medical care. However, if these programs learn from flawed or unfair historical data, they will repeat and amplify those exact same discriminatory mistakes."*
-> — Google Solutions Challenge 2026
+> — Google Solutions Challenge 2026, Theme: Unbiased AI Decision
 
 Most AI systems today are trained on **human-labelled historical data**. That data reflects the real world — including its inequalities, its prejudices, and its systemic discrimination. When an AI learns from this data, it doesn't just inherit those biases. It **automates and amplifies** them, making biased decisions faster and at greater scale than any human could.
 
@@ -78,12 +97,6 @@ This is genuinely hard:
 
 **SPECTRA solves this by training entirely on physics.** Instead of asking *"what did human experts label as correct before?"*, it asks *"what does plasma physics say must be true?"*
 
-The result is a neural network that:
-- Reconstructs accurate 2D plasma images from noisy sensor data
-- Runs in **under 1 millisecond** on GPU — fast enough for real-time reactor control
-- Generalises across different plasma conditions without retraining
-- Makes every decision based solely on verifiable physical law
-
 ```
 SXR sensor measurements (noisy)
             ↓
@@ -100,18 +113,14 @@ Stable plasma → sustained fusion → clean energy → SDG 7
 
 ## 🏗️ How It Works
 
-SPECTRA runs in two phases:
-
 ### Phase 1 — Forward Simulator
-Builds a physics-accurate model of the reactor geometry and generates synthetic plasma measurements. This creates the environment SPECTRA is trained and evaluated in. Specifically it produces:
+Builds a physics-accurate model of the reactor geometry and generates synthetic plasma measurements. Produces:
 - A synthetic plasma emissivity phantom from a Bremsstrahlung profile model
 - A chord geometry matrix via Siddon ray tracing through an elliptical plasma boundary
 - Noisy measurements with physically correct Poisson shot noise and Gaussian electronic noise
 
 ### Phase 2 — PINN Training
-Trains the neural network using 15 physics constraints as the only training signal. No human labels are used at any point. The network learns to reconstruct plasma profiles that satisfy all physical laws simultaneously across 10,000 training epochs in a 3-stage curriculum.
-
-After training, results are benchmarked against classical methods and tested across noise levels to verify robustness.
+Trains the neural network using 15 physics constraints as the only training signal. No human labels at any point. 10,000 epochs across a 3-stage curriculum.
 
 ---
 
@@ -130,12 +139,12 @@ After training, results are benchmarked against classical methods and tested acr
 
 ## ⚙️ The 15-Term Physics Loss — The Bias Elimination Mechanism
 
-This is the heart of SPECTRA's unbiased approach. Every loss term is derived from plasma physics theory. **Zero ground truth. Zero human labels. Zero historical bias.**
+**Zero ground truth. Zero human labels. Zero historical bias.**
 
 | Loss Term | Weight | What It Enforces |
 |---|---|---|
 | `l_data` (Poisson-weighted) | 1.000 | Measurements consistent with SXR detector noise physics |
-| `l_sym` | 0.100 | Plasma must be symmetric about the midplane — a fundamental tokamak property |
+| `l_sym` | 0.100 | Plasma must be symmetric about the midplane |
 | `l_neg` | 0.100 | Emissivity cannot be negative — physically impossible |
 | `l_fsa` | 0.050 | Flux-surface averaging consistency |
 | `l_edge` | 0.050 | Emissivity must approach zero at the plasma boundary |
@@ -156,19 +165,17 @@ Ground truth is loaded **only** for post-hoc evaluation metrics after training f
 
 ## 🧪 Three Plasma Profiles Tested
 
-To verify SPECTRA generalises beyond one plasma type:
-
 | Profile | Physics Mode | Description |
 |---|---|---|
-| **Peaked** | H-mode | Sharp core emission peak with pedestal shoulder — typical high-performance plasma |
-| **Broad** | L-mode | Wider, lower-gradient profile — typical standard plasma |
+| **Peaked** | H-mode | Sharp core emission peak with pedestal shoulder |
+| **Broad** | L-mode | Wider, lower-gradient profile |
 | **Hollow** | Reversed shear | Off-axis emission ring — the most challenging case |
 
 ---
 
 ## 📊 Benchmarks
 
-SPECTRA is compared against six methods, all running on identical hardware (JAX, T4 GPU, same geometry matrix):
+SPECTRA compared against six methods on identical hardware (JAX, T4 GPU, same geometry matrix):
 
 | Method | Type |
 |---|---|
@@ -180,7 +187,7 @@ SPECTRA is compared against six methods, all running on identical hardware (JAX,
 | Savitzky-Golay | Polynomial fitting |
 | **★ SPECTRA v26.3** | **Physics-informed neural network** |
 
-**Cross-noise robustness** is evaluated at three independent noise levels:
+**Cross-noise robustness** tested at three independent noise levels:
 
 | Level | Sigma | Represents |
 |---|---|---|
@@ -191,8 +198,6 @@ SPECTRA is compared against six methods, all running on identical hardware (JAX,
 ---
 
 ## 🖥️ Live UI — 5 Tabs
-
-SPECTRA ships with a full **Streamlit Live UI** that runs in your browser:
 
 | Tab | What You See |
 |---|---|
@@ -209,35 +214,30 @@ SPECTRA ships with a full **Streamlit Live UI** that runs in your browser:
 ### What You Need
 - A Google account
 - Google Colab — free tier is fine
-- **T4 GPU runtime** (required — free in Colab)
-- No local installation needed at all
+- **T4 GPU runtime** — free in Colab, required for training speed
+- No local installation needed
 
-### Run It — Step by Step
+### Run It
 
-**1. Open the notebook in Colab**
+**1. Click the link below to open directly in Colab:**
 
-Click this link (replace with your repo details):
-```
-https://colab.research.google.com/github/YOUR_USERNAME/YOUR_REPO/blob/main/SPECTRA_v26_3.ipynb
-```
+👉 **[https://colab.research.google.com/github/vijaideen/SPECTRA-GSC2026/blob/main/SPECTRA_v26_3.ipynb](https://colab.research.google.com/github/vijaideen/SPECTRA-GSC2026/blob/main/SPECTRA_v26_3.ipynb)**
 
-**2. Set the runtime to T4 GPU**
+**2. Set runtime to T4 GPU:**
 ```
 Runtime → Change runtime type → T4 GPU → Save
 ```
 
-**3. Run all cells**
+**3. Run all cells:**
 ```
 Runtime → Run all
 ```
 
-**4. Open the Live UI**
+**4. Open the Live UI:**
+Wait for Cell 1 to finish installing (~2 min). Click the public URL printed under Cell 3.
 
-Wait for Cell 1 to finish installing (~2 min). A public URL will appear under Cell 3 — click it to open the Live UI in a new tab.
-
-**5. Wait for training**
-
-Training takes ~5–7 min on T4. All 5 tabs populate automatically when done.
+**5. Wait for training (~5–7 min):**
+All 5 tabs populate automatically when done.
 
 > ⚠️ Keep your Colab tab open while using the UI — the tunnel closes when the session ends.
 
@@ -246,11 +246,11 @@ Training takes ~5–7 min on T4. All 5 tabs populate automatically when done.
 ## 📁 Project Structure
 
 ```
-SPECTRA_v26_3.ipynb        Main notebook — open this in Google Colab
+SPECTRA_v26_3.ipynb        Main notebook — open in Google Colab
 README.md                  This file
 
 Generated automatically at runtime:
-├── app.py                 Streamlit Live UI (written by Cell 2, run by Cell 3)
+├── app.py                 Streamlit Live UI (written by Cell 2, launched by Cell 3)
 ├── sxr_data/
 │   ├── epsilon_true_2d.npy       Ground truth phantom (post-hoc eval only)
 │   ├── g_noisy.npy               Noisy SXR chord measurements
@@ -270,7 +270,7 @@ SPECTRA is a **proof of concept** validated on physics-consistent synthetic data
 
 | Limitation | Current State | Planned Next Step |
 |---|---|---|
-| Geometry | Elliptical plasma boundary (κ=1.3) — not full D-shaped equilibrium | Integrate EFIT MHD equilibrium loading |
+| Geometry | Elliptical plasma boundary (κ=1.3) | Integrate full EFIT MHD equilibrium |
 | Data | Synthetic phantoms only | Validate against real WEST tokamak SXR data |
 | Hardware | Timing on Colab T4 | Re-benchmark on dedicated tokamak control hardware |
 | Integration | Reconstruction step only | Connect to full disruption prediction pipeline |
@@ -315,6 +315,8 @@ SPECTRA is a **proof of concept** validated on physics-consistent synthetic data
 | **Version** | SPECTRA v26.3 |
 | **Stack** | JAX · Flax · Optax · Streamlit · Python |
 | **Hardware** | Google Colab T4 GPU |
+| **MVP Link** | [Open in Colab](https://colab.research.google.com/github/vijaideen/SPECTRA-GSC2026/blob/main/SPECTRA_v26_3.ipynb) |
+| **GitHub** | [vijaideen/SPECTRA-GSC2026](https://github.com/vijaideen/SPECTRA-GSC2026) |
 
 ---
 
