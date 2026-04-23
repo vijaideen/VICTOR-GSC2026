@@ -267,6 +267,20 @@ Open Innovation Track — Unbiased AI Decision
 
 ---
 
+## 📚 References
+
+The following peer-reviewed publications describe the GEM-based SXR diagnostic system for the WEST tokamak that underpins the detector geometry, noise model, and measurement matrix used in VICTOR:
+
+1. **Krawczyk, R. D., Czarski, T., Linczuk, P., Wojeński, A., Kolasiński, P., Gąska, M., Chernyshova, M., Mazon, D., Jardin, A., Malard, P., Poźniak, K., Kasprowicz, G., Zabołotny, W., Kowalska-Strzęciwilk, E., & Malinowski, K.** (2018). The software-defined fast post-processing for GEM soft x-ray diagnostics in the Tungsten Environment in Steady-state Tokamak thermal fusion reactor. *Review of Scientific Instruments*, **89**, 063504. https://doi.org/10.1063/1.5022131
+
+2. **Mazon, D., Chernyshova, M., Jiolat, G., Czarski, T., Malard, P., Kowalska-Strzeciwilk, E., Jablonski, S., Figacz, W., Zagorski, R., Kubkowska, M., Kasprowicz, G., Pozniak, K., Zabolotny, W., Larroque, S., Verger, J.-M., O'Mullane, M., Mlynar, J., Byszuk, A., & Wojenski, A.** (2015). Design of soft-X-ray tomographic system in WEST using GEM detectors. *Fusion Engineering and Design*, **96–97**, 856–860. https://doi.org/10.1016/j.fusengdes.2015.03.052
+
+3. **Chernyshova, M., Malinowski, K., Czarski, T., Kowalska-Strzęciwilk, E., Linczuk, P., Wojeński, A., Krawczyk, R. D., & Melikhov, Y.** (2019). Advantages of Al based GEM detector aimed at plasma soft−semi hard X-ray radiation imaging. *Fusion Engineering and Design*, **146**, 1039–1042. https://doi.org/10.1016/j.fusengdes.2019.01.153
+
+4. **Chernyshova, M., Czarski, T., Malinowski, K., Kowalska-Strzeciwilk, E., Król, J., Poźniak, K. T., Kasprowicz, G., Zabołotny, W., Wojeński, A., Krawczyk, R. D., Kolasiński, P., Demchenko, I. N., & Melikhov, Y.** (2017). Development of GEM detector for tokamak SXR tomography system: Preliminary laboratory tests. *Fusion Engineering and Design*, **123**, 877–881. https://doi.org/10.1016/j.fusengdes.2017.03.107
+
+---
+
 ## 📜 Licence
 
 Apache License 2.0 — free to use, modify, and distribute with attribution. See [LICENSE](./LICENSE) for full terms.
